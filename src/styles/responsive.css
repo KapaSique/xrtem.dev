@@ -64,6 +64,50 @@
     display: none;
   }
 
+  .project-scene {
+    padding: 92px var(--page-pad) 72px;
+  }
+
+  .project-scene__header {
+    display: block;
+  }
+
+  .project-scene__header h2 {
+    margin-top: 40px;
+    font-size: clamp(5rem, 25vw, 8rem);
+  }
+
+  .project-scene__statement,
+  .project-scene__description {
+    margin-top: 32px;
+  }
+
+  .project-scene__statement {
+    font-size: clamp(2.15rem, 11vw, 3.7rem);
+  }
+
+  .chase-contact-sheet {
+    display: grid;
+    grid-template-columns: 1fr 0.74fr;
+    gap: 48px 12px;
+    margin-top: 72px;
+  }
+
+  .chase-contact-sheet li:nth-child(n) {
+    grid-column: auto;
+    margin: 0;
+  }
+
+  .chase-contact-sheet li:nth-child(1),
+  .chase-contact-sheet li:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+
+  .project-facts {
+    display: grid;
+    gap: 12px;
+  }
+
   a,
   button {
     min-height: 44px;
