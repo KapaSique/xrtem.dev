@@ -12,4 +12,18 @@
   .contact-scene a:hover {
     opacity: 0.58;
   }
+
+  .collision-window {
+    transition:
+      filter 240ms ease,
+      transform 500ms var(--ease-cut);
+  }
+
+  .collision-window--chase:hover {
+    transform: rotate(-0.5deg) scale(1.025);
+  }
+
+  .collision-window--petmek:hover {
+    transform: rotate(0.25deg) scale(1.025);
+  }
 }

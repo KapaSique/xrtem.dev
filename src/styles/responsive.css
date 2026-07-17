@@ -11,6 +11,59 @@
     display: none;
   }
 
+  .collision-hero {
+    min-height: 100svh;
+    grid-template-rows: auto 1fr auto auto;
+    padding-top: 64px;
+  }
+
+  .collision-hero__meta span:last-child {
+    display: none;
+  }
+
+  .collision-title {
+    align-self: center;
+    font-size: clamp(4.5rem, 24vw, 8rem);
+    line-height: 0.72;
+  }
+
+  .collision-window {
+    width: 42vw;
+  }
+
+  .collision-window--chase {
+    top: 23%;
+    left: 5%;
+    height: 29vh;
+  }
+
+  .collision-window--petmek {
+    right: 4%;
+    bottom: 30%;
+    height: 19vh;
+  }
+
+  .collision-hero__tape {
+    grid-column: 1 / -1;
+    overflow-x: auto;
+  }
+
+  .contribution-tape {
+    min-width: 680px;
+  }
+
+  .contribution-tape__meta {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .contribution-tape__meta span:nth-of-type(2) {
+    display: none;
+  }
+
+  .collision-hero__exit {
+    display: none;
+  }
+
   a,
   button {
     min-height: 44px;
