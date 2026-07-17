@@ -1,11 +1,11 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { ReactLenis, type LenisRef } from "lenis/react";
-import { useReducedMotion } from "motion/react";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { gsap, ScrollTrigger } from "./gsap";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<LenisRef>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduceMotion) return;

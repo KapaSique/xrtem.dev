@@ -12,27 +12,12 @@ import {
   WebGLRenderer,
 } from "three";
 
-export type CanvasCapabilities = {
-  reducedMotion: boolean;
-  viewportWidth: number;
-  deviceMemory?: number;
-  webgl: boolean;
-};
-
 export type EditorialController = {
   setMix(value: number): void;
   setIntensity(value: number): void;
   resize(): void;
   destroy(): void;
 };
-
-export function canUseEditorialCanvas(value: CanvasCapabilities) {
-  if (!value.webgl || value.reducedMotion) return false;
-  if (value.viewportWidth < 640 && (value.deviceMemory ?? 4) <= 2) {
-    return false;
-  }
-  return true;
-}
 
 const vertexShader = `
   varying vec2 vUv;

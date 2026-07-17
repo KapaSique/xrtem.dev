@@ -1,5 +1,5 @@
 import type { RefObject } from "react";
-import { useReducedMotion } from "motion/react";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import type { EditorialController } from "../webgl/editorialRenderer";
 import { gsap, ScrollTrigger, useGSAP } from "./gsap";
 
@@ -13,7 +13,7 @@ export function usePortfolioMotion(
   rootRef: RefObject<HTMLDivElement | null>,
   canvasController: ControllerRef,
 ) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {

@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
-import {
-  canUseEditorialCanvas,
-  type EditorialController,
-} from "../webgl/editorialRenderer";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { canUseEditorialCanvas } from "../webgl/editorialPolicy";
+import type { EditorialController } from "../webgl/editorialRenderer";
 
 type ControllerRef = {
   current: EditorialController | null;
@@ -24,8 +22,18 @@ export function EditorialCanvas({
   controllerRef,
 }: EditorialCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const reduceMotion = useReducedMotion();
-  const [enabled, setEnabled] = useState(false);
+  const reduceMotion = usePrefersReducedMotion();
+  const [enabled, setEnabled] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const memory = (navigator as Navigator & { deviceMemory?: number })
+      .deviceMemory;
+    return canUseEditorialCanvas({
+      reducedMotion: false,
+      viewportWidth: window.innerWidth,
+      deviceMemory: memory,
+      webgl: hasWebGL(),
+    });
+  });
 
   useEffect(() => {
     const memory = (navigator as Navigator & { deviceMemory?: number })

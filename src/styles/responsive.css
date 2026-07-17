@@ -27,8 +27,8 @@
 
   .collision-title {
     align-self: center;
-    font-size: clamp(4.5rem, 24vw, 8rem);
-    line-height: 0.72;
+    font-size: clamp(4.2rem, 19.6vw, 6rem);
+    line-height: 0.76;
   }
 
   .collision-window {
@@ -81,6 +81,10 @@
     font-size: clamp(5rem, 25vw, 8rem);
   }
 
+  .chase-scene .project-scene__header h2 {
+    font-size: clamp(4rem, 20vw, 6.4rem);
+  }
+
   .project-scene__statement,
   .project-scene__description {
     margin-top: 32px;
@@ -129,7 +133,7 @@
 
   .petmek-pipeline__copy h3 {
     max-width: none;
-    font-size: clamp(3.2rem, 17vw, 5.5rem);
+    font-size: clamp(2.7rem, 13.5vw, 4.5rem);
   }
 
   .petmek-pipeline__image {
@@ -178,7 +182,8 @@
   }
 
   .contact-scene h2 {
-    font-size: clamp(4.2rem, 21vw, 7rem);
+    font-size: clamp(3.45rem, 14.2vw, 5rem);
+    line-height: 0.78;
   }
 
   .contact-scene__links {

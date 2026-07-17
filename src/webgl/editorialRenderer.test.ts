@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canUseEditorialCanvas } from "./editorialRenderer";
+import { canUseEditorialCanvas } from "./editorialPolicy";
 
 describe("editorial canvas policy", () => {
   it("disables WebGL for reduced motion and narrow low-memory devices", () => {
@@ -15,7 +15,7 @@ describe("editorial canvas policy", () => {
       canUseEditorialCanvas({
         reducedMotion: false,
         viewportWidth: 390,
-        deviceMemory: 2,
+        deviceMemory: 8,
         webgl: true,
       }),
     ).toBe(false);
