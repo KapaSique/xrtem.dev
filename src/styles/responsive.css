@@ -108,6 +108,31 @@
     gap: 12px;
   }
 
+  .petmek-pipeline {
+    margin-top: 72px;
+    padding-left: 18px;
+  }
+
+  .petmek-pipeline > li {
+    display: block;
+    min-height: 0;
+    padding: 64px 0 92px;
+  }
+
+  .petmek-pipeline > li::before {
+    left: -24px;
+  }
+
+  .petmek-pipeline__copy h3 {
+    max-width: none;
+    font-size: clamp(3.2rem, 17vw, 5.5rem);
+  }
+
+  .petmek-pipeline__image {
+    margin-top: 44px;
+    box-shadow: 8px 8px 0 var(--cobalt);
+  }
+
   a,
   button {
     min-height: 44px;
