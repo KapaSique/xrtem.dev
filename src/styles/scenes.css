@@ -1,0 +1,6 @@
+.project-scene,
+.experiment-reel,
+.contact-scene {
+  position: relative;
+  padding: clamp(96px, 12vw, 180px) var(--page-pad);
+}

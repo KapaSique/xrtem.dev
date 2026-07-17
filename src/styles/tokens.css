@@ -1,0 +1,13 @@
+:root {
+  --paper: #eeeae1;
+  --carbon: #111111;
+  --cobalt: #1646ff;
+  --orange: #ff4d19;
+  --graphite: #68645d;
+  --line: color-mix(in srgb, var(--carbon) 22%, transparent);
+  --font-display: "Archivo Variable", "Arial Narrow", sans-serif;
+  --font-editorial: "Bodoni Moda Variable", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --ease-cut: cubic-bezier(0.16, 1, 0.3, 1);
+  --page-pad: clamp(16px, 2.1vw, 36px);
+}

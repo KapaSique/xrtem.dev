@@ -1,0 +1,15 @@
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-header a,
+  .project-scene__cta,
+  .experiment-card a,
+  .contact-scene a {
+    transition: opacity 180ms ease;
+  }
+
+  .portfolio-header a:hover,
+  .project-scene__cta:hover,
+  .experiment-card a:hover,
+  .contact-scene a:hover {
+    opacity: 0.58;
+  }
+}

@@ -1,0 +1,33 @@
+@media (max-width: 767px) {
+  .portfolio-header {
+    padding-top: 12px;
+  }
+
+  .portfolio-header nav a:first-child {
+    display: none;
+  }
+
+  .scene-progress {
+    display: none;
+  }
+
+  a,
+  button {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
