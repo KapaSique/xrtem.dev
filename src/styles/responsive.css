@@ -133,6 +133,58 @@
     box-shadow: 8px 8px 0 var(--cobalt);
   }
 
+  .experiment-reel__header {
+    display: block;
+  }
+
+  .experiment-reel__header h2 {
+    margin-top: 42px;
+    font-size: clamp(4rem, 20vw, 6.5rem);
+  }
+
+  .experiment-reel__viewport {
+    margin-top: 68px;
+  }
+
+  .experiment-reel__track {
+    display: grid;
+    width: auto;
+    gap: 80px;
+    padding: 0;
+    transform: none !important;
+  }
+
+  .experiment-card:nth-child(n) {
+    width: auto;
+    margin: 0;
+  }
+
+  .experiment-card__visual {
+    min-height: 62vw;
+  }
+
+  .experiment-card__body {
+    display: block;
+  }
+
+  .experiment-card__body p,
+  .experiment-card__body strong,
+  .experiment-card__body > div {
+    margin-top: 18px;
+  }
+
+  .contact-scene h2 {
+    font-size: clamp(4.2rem, 21vw, 7rem);
+  }
+
+  .contact-scene__links {
+    flex-direction: column;
+  }
+
+  .contact-scene .contribution-tape {
+    overflow-x: auto;
+  }
+
   a,
   button {
     min-height: 44px;
