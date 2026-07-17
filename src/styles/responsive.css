@@ -11,6 +11,10 @@
     display: none;
   }
 
+  .editorial-canvas {
+    display: none;
+  }
+
   .collision-hero {
     min-height: 100svh;
     grid-template-rows: auto 1fr auto auto;
@@ -203,5 +207,17 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  [data-hero-strip],
+  [data-chase-frame],
+  [data-petmek-step],
+  [data-experiment-track] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .editorial-canvas {
+    display: none;
   }
 }
