@@ -114,10 +114,10 @@ export const experiments = [
     proof: "24/24 EVALS",
     sourceUrl: "https://github.com/KapaSique/trustlens",
     media: {
-      src: "/media/experiments/trustlens.png",
+      src: "/media/experiments/trustlens.webp",
       alt: "TrustLens multi-agent verification system",
-      width: 1280,
-      height: 640,
+      width: 1200,
+      height: 300,
     },
   },
   {
@@ -129,10 +129,10 @@ export const experiments = [
     sourceUrl: "https://github.com/KapaSique/second-look-triage",
     liveUrl: "https://huggingface.co/spaces/KapaSique/second-look-triage",
     media: {
-      src: "/media/experiments/second-look.png",
+      src: "/media/experiments/second-look.webp",
       alt: "Second Look clinical triage safety system",
       width: 1280,
-      height: 640,
+      height: 360,
     },
   },
   {
