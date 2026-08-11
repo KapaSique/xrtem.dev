@@ -1,51 +1,66 @@
 # xrtem.dev
 
-Artem Stelmah / KapaSique's editorial portfolio: commercial products,
-technical systems, ML/CV, and motion from Yakutsk.
+Portfolio of **Artem Svinoboev** — ML, computer vision and full-stack engineering.
 
-## Commands
+A single page on warm paper: seven projects, four measured results, two languages,
+and three deliberate pieces of motion. Everything else is hairlines and space.
+
+## Stack
+
+| Layer | Tech |
+| --- | --- |
+| Framework | Next.js 16 (App Router, RSC) |
+| Styling | Tailwind CSS v4 with `@theme` tokens |
+| Motion | `motion` (Framer) — mask reveals, scroll-velocity marquee, sticky crossfade |
+| Type | Inter · Playfair Display (italic accent) · JetBrains Mono |
+| Hosting | Vercel |
+
+## Design system
+
+Three tokens carry the whole page: warm paper `#faf9f7`, graphite ink `#1a1a18`,
+and an 11% hairline. Colour appears exactly once — the live-status dot. Display
+type is never bold; weight comes from size. Mono is reserved for labels, indices
+and metrics.
+
+## Motion
+
+Three moments, and nothing else:
+
+1. **Hero** — per-word mask reveal; each word rises out of its own overflow box.
+2. **Work** — a sticky media column crossfades to whichever row sits at the
+   viewport's midline, while inactive rows drop to 45% opacity.
+3. **Toolchain** — an infinite marquee whose speed and direction are coupled to
+   scroll velocity.
+
+All three collapse under `prefers-reduced-motion`.
+
+## Content
+
+Every project fact, metric and link lives in [`content/site.ts`](content/site.ts)
+as an `{ en, ru }` pair. There is no CMS and no translation runtime — the language
+toggle swaps a key.
+
+The contribution strip in *About* is scraped server-side from the public GitHub
+calendar with a one-hour ISR window. Any failure returns `null` and the strip
+simply does not render.
+
+## Develop
 
 ```bash
 npm install
 npm run dev
-npm test
-npm run lint
+```
+
+```bash
 npm run build
 ```
 
-## Architecture
+```bash
+npm run lint
+```
 
-The page is a single semantic document made of five scenes:
+## Deploy
 
-1. `CollisionHero` introduces Artem, CHASE.JE, Petmek, and the GitHub tape.
-2. `ChaseScene` presents the private archive boutique through real imagery.
-3. `PetmekScene` maps a customer review into AI analysis and owner action.
-4. `ExperimentReel` contains four selected public technical projects.
-5. `ContactScene` closes the page and repeats the activity signal.
-
-Project copy, links, proof points, and media metadata live in
-`src/data/projects.ts`. GitHub activity is fetched publicly and falls back to
-the verified snapshot captured on 2026-07-17.
-
-## Motion boundaries
-
-- GSAP and ScrollTrigger own scene timelines, pinning, masks, and progress.
-- Lenis runs with `autoRaf: false` and is synchronized through the GSAP ticker.
-- A small local media-query hook owns reduced-motion detection.
-- Three.js owns one fixed image-transition canvas. The renderer caps pixel
-  ratio, renders on invalidation, and disposes textures, geometry, material,
-  observer, frame, renderer, and WebGL context on unmount.
-- The Three.js renderer is isolated in a lazy chunk; the initial application
-  bundle does not import it.
-- Mobile and `prefers-reduced-motion` keep the complete HTML reading order
-  without the WebGL layer or pinned horizontal sequences.
-
-## Media provenance
-
-- CHASE.JE imagery is copied from the owner-controlled local CHASE.JE project.
-- Petmek screenshots are copied from the owner-controlled OOOpetmek project.
-- TrustLens and Second Look banners come from their public GitHub repositories
-  and are locally optimized as WebP.
-
-No private repository links, infrastructure endpoints, credentials, customer
-records, or fabricated commercial metrics are included.
+```bash
+vercel deploy --prod --yes --scope batteryofsprunk-6379s-projects
+```
