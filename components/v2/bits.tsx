@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -9,25 +10,51 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * Aurora — the only large moving thing on the page. Kept translucent
  * and slow (24s+) so it never reads as a strobing background.
  * ------------------------------------------------------------------ */
-export function Aurora({ className = "" }: { className?: string }) {
+export function Aurora({
+  className = "",
+  src,
+  priority = false,
+}: {
+  className?: string;
+  /** A rendered light field. Without it the layer falls back to CSS blobs. */
+  src?: string;
+  priority?: boolean;
+}) {
   const reduced = useReducedMotion();
 
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
-      <div
-        className="absolute -top-1/3 left-[8%] h-[46rem] w-[46rem] rounded-full opacity-[0.22] blur-[110px]"
-        style={{
-          background: "radial-gradient(circle, var(--color-champagne) 0%, transparent 68%)",
-          animation: reduced ? undefined : "v2drift 30s ease-in-out infinite alternate",
-        }}
-      />
-      <div
-        className="absolute -top-1/4 right-[4%] h-[38rem] w-[38rem] rounded-full opacity-[0.16] blur-[120px]"
-        style={{
-          background: "radial-gradient(circle, #6d7cff 0%, transparent 70%)",
-          animation: reduced ? undefined : "v2drift 38s ease-in-out infinite alternate-reverse",
-        }}
-      />
+      {src ? (
+        <>
+          <Image src={src} alt="" fill priority={priority} sizes="100vw" className="object-cover" />
+          {/* Scrim so the field dissolves into the page rather than ending
+              on a hard edge. */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(23,24,28,0.35) 0%, rgba(23,24,28,0.55) 45%, var(--color-graphite-900) 100%)",
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <div
+            className="absolute -top-1/3 left-[8%] h-[46rem] w-[46rem] rounded-full opacity-[0.22] blur-[110px]"
+            style={{
+              background: "radial-gradient(circle, var(--color-champagne) 0%, transparent 68%)",
+              animation: reduced ? undefined : "v2drift 30s ease-in-out infinite alternate",
+            }}
+          />
+          <div
+            className="absolute -top-1/4 right-[4%] h-[38rem] w-[38rem] rounded-full opacity-[0.16] blur-[120px]"
+            style={{
+              background: "radial-gradient(circle, #6d7cff 0%, transparent 70%)",
+              animation: reduced ? undefined : "v2drift 38s ease-in-out infinite alternate-reverse",
+            }}
+          />
+        </>
+      )}
       {/* Structural grid — gives the dark field a scale reference. */}
       <div
         className="absolute inset-0 opacity-[0.16]"

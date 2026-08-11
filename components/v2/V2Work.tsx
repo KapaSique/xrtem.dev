@@ -56,8 +56,11 @@ function Tile({ work, large }: { work: Work; large: boolean }) {
             sizes="(max-width: 1024px) 100vw, 66vw"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col justify-center gap-2 p-7 opacity-45 transition-opacity duration-700 group-hover/tile:opacity-70">
-            {media.lines.map((line) => (
+          // Top-aligned: centring this block runs it straight through the
+          // title that sits at the bottom of the tile.
+          <div className="absolute inset-x-0 top-0 flex flex-col gap-2 p-6 opacity-40 transition-opacity duration-700 group-hover/tile:opacity-65 md:p-7">
+            {/* Three lines is all a tile has room for above the title. */}
+            {media.lines.slice(0, 3).map((line) => (
               <p key={line} className="font-mono text-[0.7rem] leading-snug text-mist-300">
                 {line}
               </p>

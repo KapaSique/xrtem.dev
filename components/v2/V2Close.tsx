@@ -73,7 +73,7 @@ export function V2Cta() {
 
   return (
     <section className="relative overflow-hidden border-t border-white/8 bg-graphite-950 pt-24 pb-10 md:pt-32">
-      <Aurora className="opacity-70" />
+      <Aurora src="/media/v2/cta-horizon.jpg" />
 
       <div className="shell relative">
         <Rise>

@@ -24,7 +24,7 @@ export function V2Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-      <Aurora />
+      <Aurora src="/media/v2/hero-field.jpg" priority />
 
       <div className="shell relative">
         <motion.p {...rise(0.05)} className="v2-label text-mist-500">

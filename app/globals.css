@@ -1,30 +1,14 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- * Design tokens — warm paper, graphite ink, near-zero colour.
- * The whole system is built from three things: type scale, hairlines,
- * and negative space. Colour is reserved for one live-status dot.
+ * Premium graphite. Never pure black — #101114 is the floor, and
+ * surfaces step up from it so depth comes from elevation rather than
+ * from borders. Colour is reserved for one champagne accent.
  * ------------------------------------------------------------------ */
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
 
-  /* Deeper paper and darker secondaries: the first pass read as washed out. */
-  --color-paper: #f4f2ed;
-  --color-paper-2: #e9e6df;
-  --color-paper-3: #dbd6cc;
-  --color-ink: #15140f;
-  --color-ink-2: #22211b;
-  --color-ink-soft: #3d3a33;
-  --color-ink-mute: #6f6a5f;
-  --color-line: rgba(21, 20, 15, 0.17);
-  --color-line-2: rgba(21, 20, 15, 0.34);
-  --color-live: #4f7a52;
-
-  /* ---- Variant 2: premium graphite. Never pure black — #101114 is the
-     floor, and surfaces step up from it so depth comes from elevation
-     rather than from borders. ---- */
   --color-graphite-950: #101114;
   --color-graphite-900: #17181c;
   --color-graphite-850: #1c1e23;
@@ -36,41 +20,36 @@
   --color-mist-700: #5b606a;
   --color-champagne: #c6a87d;
   --color-champagne-dim: #8d7857;
+  --color-live: #6f9a72;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --spacing-gutter: clamp(1.25rem, 4.5vw, 5rem);
 }
 
 @layer base {
-  * {
-    border-color: var(--color-line);
-  }
-
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    background: var(--color-paper);
+    background: var(--color-graphite-900);
+    color-scheme: dark;
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-graphite-900);
+    color: var(--color-mist-100);
     font-family: var(--font-sans);
     font-feature-settings: "cv11", "ss01";
-    font-variant-ligatures: contextual;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   ::selection {
-    background: var(--color-ink);
-    color: var(--color-paper);
+    background: var(--color-champagne);
+    color: var(--color-graphite-950);
   }
 
   :focus-visible {
-    outline: 1.5px solid var(--color-ink);
+    outline: 1.5px solid var(--color-champagne);
     outline-offset: 3px;
   }
 
@@ -85,46 +64,50 @@
       transition-duration: 0.001ms !important;
     }
   }
+
+  /* Translucent chrome collapses to a solid surface when the user asks
+     for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .backdrop-blur-xl {
+      backdrop-filter: none !important;
+      background: var(--color-graphite-900) !important;
+    }
+  }
 }
 
 @layer components {
-  /* Editorial label — the only place mono type is allowed to appear. */
-  .label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    line-height: 1;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-mute);
-  }
-
-  /* Display type: optically tight, never bold. Weight comes from size. */
-  .display {
-    font-weight: 450;
-    letter-spacing: -0.045em;
-    line-height: 0.86;
-    text-wrap: balance;
-  }
-
-  .serif-accent {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.02em;
-  }
-
-  .rule {
-    height: 1px;
-    width: 100%;
-    background: var(--color-line);
-  }
-
   /* The single layout container the whole page is measured against. */
   .shell {
     width: 100%;
-    max-width: 96rem;
+    max-width: 90rem;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 4.5vw, 5rem);
+  }
+
+  /* Display type: optically tight, never bold. Weight comes from size. */
+  .v2-display {
+    font-weight: 500;
+    letter-spacing: -0.038em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  /* Small caps label — the only place mono type appears. Tracking opens
+     up here because the type is small. */
+  .v2-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Press feedback belongs on pointer-down, not on release. */
+  .press {
+    transition: transform 120ms var(--ease-out-expo);
+  }
+  .press:active {
+    transform: scale(0.975);
   }
 
   /* Link with a hairline that draws itself left-to-right on hover. */
@@ -148,38 +131,12 @@
   .link-draw:focus-visible::after {
     transform: scaleX(1);
   }
-}
 
-/* Variant 2 owns the document background when it is on screen, so overscroll
-   past the top or bottom shows graphite rather than a strip of paper. */
-body:has(.v2-root) {
-  background: var(--color-graphite-900);
-  color: var(--color-mist-100);
-}
-
-/* Type scale for the graphite variant. Tracking is size-specific: display
-   text tightens as it grows, small caps labels open up. */
-.v2-display {
-  font-weight: 500;
-  letter-spacing: -0.038em;
-  line-height: 1.02;
-  text-wrap: balance;
-}
-
-.v2-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  line-height: 1;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* Press feedback belongs on pointer-down, not on release. */
-.press {
-  transition: transform 120ms var(--ease-out-expo);
-}
-.press:active {
-  transform: scale(0.975);
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+  }
 }
 
 @keyframes v2drift {
@@ -198,22 +155,4 @@ body:has(.v2-root) {
   to {
     background-position: -220% 50%;
   }
-}
-
-/* Paper grain — 3.5% opacity, fixed, never intercepts pointer events. */
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Marquee track — duplicated content scrolled by a motion value. */
-.marquee-track {
-  display: flex;
-  white-space: nowrap;
-  will-change: transform;
 }

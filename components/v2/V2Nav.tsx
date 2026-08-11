@@ -51,7 +51,7 @@ export function V2Nav() {
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
                 className={`v2-label px-1.5 py-1 transition-colors duration-300 ${
-                  lang === code ? "text-mist-100" : "text-mist-700 hover:text-mist-300"
+                  lang === code ? "text-mist-100" : "text-mist-500 hover:text-mist-100"
                 }`}
               >
                 {code.toUpperCase()}

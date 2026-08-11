@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { animate, useInView, useReducedMotion } from "motion/react";
 
 /** Splits "49.68%" into 49.68 · 2 decimals · "%". Returns null for non-numeric values. */
 function parse(value: string) {
@@ -15,32 +15,51 @@ function parse(value: string) {
   };
 }
 
-/** Metrics count up once, when they first cross into view. */
+/**
+ * Metrics count up once, when they first cross into view.
+ *
+ * The animation is deliberately short and always ends by rendering the
+ * original string verbatim. An easing tail that leaves 0.9066 on screen
+ * for a second would be a page that misreports its own numbers.
+ */
 export function CountUp({ value, className }: { value: string; className?: string }) {
   const parsed = parse(value);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
+  const inView = useInView(ref, { once: true, margin: "-12% 0px -12% 0px" });
   const reduced = useReducedMotion();
 
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, { damping: 34, stiffness: 70, restDelta: 0.0001 });
-  const [shown, setShown] = useState(parsed ? 0 : null);
+  const [shown, setShown] = useState(0);
+  const [settled, setSettled] = useState(false);
+  // Server output and the first client render both carry the real number,
+  // so crawlers and no-JS readers never see a zero.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (parsed && inView) motionValue.set(parsed.target);
-  }, [inView, motionValue, parsed]);
+    if (!parsed || !inView || reduced) return;
+    const controls = animate(0, parsed.target, {
+      duration: 0.9,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: setShown,
+      onComplete: () => setSettled(true),
+    });
+    return () => controls.stop();
+    // parsed is derived from `value`; depending on it directly would
+    // restart the animation on every render.
+  }, [inView, reduced, value]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => spring.on("change", (v) => setShown(v)), [spring]);
-
-  if (!parsed || reduced) return <span className={className}>{value}</span>;
-
-  const display = inView
-    ? `${(shown ?? 0).toFixed(parsed.decimals)}${parsed.suffix}`
-    : `${(0).toFixed(parsed.decimals)}${parsed.suffix}`;
+  if (!parsed || reduced || settled || !mounted) {
+    return (
+      <span ref={ref} className={className}>
+        {value}
+      </span>
+    );
+  }
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {`${shown.toFixed(parsed.decimals)}${parsed.suffix}`}
     </span>
   );
 }

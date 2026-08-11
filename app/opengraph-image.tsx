@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Artem Svinoboev — ML, CV and full-stack engineering";
+export const alt = "Artem Svinoboev — product, ML and agentic engineering";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -14,8 +14,10 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#faf9f7",
-          color: "#1a1a18",
+          background: "#17181c",
+          backgroundImage:
+            "radial-gradient(ellipse 70% 60% at 22% -10%, rgba(198,168,125,0.30) 0%, transparent 62%)",
+          color: "#f3f4f6",
           padding: "64px 72px",
           fontFamily: "sans-serif",
         }}
@@ -24,24 +26,35 @@ export default function OpengraphImage() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            fontSize: 20,
-            letterSpacing: "0.16em",
+            fontSize: 19,
+            letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#8c877d",
-            borderBottom: "1px solid rgba(26,26,24,0.14)",
+            color: "#868b94",
+            borderBottom: "1px solid rgba(255,255,255,0.12)",
             paddingBottom: 24,
           }}
         >
           <span>xrtem.dev</span>
-          <span>Yakutsk → Jiamusi → Shenzhen</span>
+          <span style={{ color: "#c6a87d" }}>5 projects in production</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 128, letterSpacing: "-0.05em", lineHeight: 1 }}>
-            ARTEM
+          <div style={{ display: "flex", fontSize: 76, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+            I take it all the way —
           </div>
-          <div style={{ display: "flex", fontSize: 128, letterSpacing: "-0.05em", lineHeight: 1 }}>
-            SVINOBOEV
+          <div
+            style={{
+              display: "flex",
+              fontSize: 76,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.05,
+              color: "#c6a87d",
+            }}
+          >
+            from the experiment
+          </div>
+          <div style={{ display: "flex", fontSize: 76, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+            to the thing people use.
           </div>
         </div>
 
@@ -50,14 +63,14 @@ export default function OpengraphImage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-end",
-            fontSize: 22,
-            color: "#55524b",
-            borderTop: "1px solid rgba(26,26,24,0.14)",
+            fontSize: 21,
+            color: "#b7bbc3",
+            borderTop: "1px solid rgba(255,255,255,0.12)",
             paddingTop: 24,
           }}
         >
-          <span>Machine learning · Computer vision · Full-stack</span>
-          <span style={{ color: "#8c877d" }}>Selected work</span>
+          <span>Artem Svinoboev · full-stack · ML / computer vision</span>
+          <span style={{ color: "#868b94" }}>Yakutsk · UTC+9</span>
         </div>
       </div>
     ),
