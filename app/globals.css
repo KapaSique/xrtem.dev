@@ -10,15 +10,16 @@
   --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
 
-  --color-paper: #faf9f7;
-  --color-paper-2: #f2f0ec;
-  --color-paper-3: #e9e6e0;
-  --color-ink: #1a1a18;
-  --color-ink-2: #262521;
-  --color-ink-soft: #55524b;
-  --color-ink-mute: #8c877d;
-  --color-line: rgba(26, 26, 24, 0.11);
-  --color-line-2: rgba(26, 26, 24, 0.24);
+  /* Deeper paper and darker secondaries: the first pass read as washed out. */
+  --color-paper: #f4f2ed;
+  --color-paper-2: #e9e6df;
+  --color-paper-3: #dbd6cc;
+  --color-ink: #15140f;
+  --color-ink-2: #22211b;
+  --color-ink-soft: #3d3a33;
+  --color-ink-mute: #6f6a5f;
+  --color-line: rgba(21, 20, 15, 0.17);
+  --color-line-2: rgba(21, 20, 15, 0.34);
   --color-live: #4f7a52;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

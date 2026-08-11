@@ -42,8 +42,12 @@ export const hero = {
     en: "Available for select work",
     ru: "Открыт для избранных проектов",
   } satisfies LS,
-  route: "Yakutsk → Jiamusi → Shenzhen",
-  routeRu: "Якутск → Цзямусы → Шэньчжэнь",
+  /** Quick signal for the dark card — density where the page used to be empty. */
+  stats: [
+    { value: "4", label: { en: "years shipping", ru: "года в разработке" } satisfies LS },
+    { value: "5", label: { en: "in production", ru: "проектов в проде" } satisfies LS },
+    { value: "top 7%", label: { en: "Kaggle private LB", ru: "Kaggle private LB" } satisfies LS },
+  ],
   /** Split so one word can carry the serif italic. */
   statement: {
     en: ["I build systems that", "survive", "contact with production."],
@@ -148,25 +152,6 @@ export const works: Work[] = [
     },
   },
   {
-    id: "secondlook",
-    title: "SECOND LOOK",
-    kind: { en: "Research", ru: "Исследование" },
-    year: "2026",
-    status: "research",
-    href: "https://huggingface.co/spaces/KapaSique/second-look-triage",
-    hrefLabel: "Live demo · Hugging Face",
-    summary: {
-      en: "An emergency triage safety net that knows what it doesn't know: calibrated ESI, plus a vitals-blind red-flag layer that can only ever raise urgency — never quietly lower it.",
-      ru: "Страховочная сетка для сортировки в приёмном покое, знающая границы своего знания: калиброванный ESI и слой красных флагов, слепой к витальным показателям, — он умеет только повышать срочность, но никогда не понижает её незаметно.",
-    },
-    note: {
-      en: "Accuracy turned out to be a mirage — the label is nearly a phrase lookup. The findings that matter were reproduced on real NHAMCS data (n = 43,921), where 26.7% of urgent visits arrive with entirely normal vitals.",
-      ru: "Точность оказалась миражом — метка почти вычисляется по фразе. Значимые выводы воспроизведены на реальных данных NHAMCS (n = 43 921): 26,7% срочных обращений приходят с полностью нормальными витальными показателями.",
-    },
-    stack: ["scikit-learn", "Gradio", "Python 3.11", "44 tests"],
-    media: { kind: "image", src: "/media/experiments/second-look.webp", alt: "Second Look triage demo" },
-  },
-  {
     id: "trustlens",
     title: "TRUSTLENS",
     kind: { en: "Agents", ru: "Агенты" },
@@ -183,7 +168,7 @@ export const works: Work[] = [
       ru: "Planner, Analyst, Verifier, Reporter. Отчёт собирается только из проверенных чисел; всё, что не прошло сверку, до страницы не доходит.",
     },
     stack: ["Google ADK", "MCP", "Gemini", "Python 3.12"],
-    media: { kind: "image", src: "/media/experiments/trustlens.webp", alt: "TrustLens agent pipeline" },
+    media: { kind: "image", src: "/media/experiments/trustlens.jpg", alt: "TrustLens verifier pipeline" },
   },
 ];
 
@@ -241,8 +226,8 @@ export const about = {
     },
   ] satisfies LS[],
   place: {
-    en: "Computer engineering at NEFU, currently between Yakutsk and Jiamusi University in China. The long game is graduate study in Shenzhen or Guangzhou.",
-    ru: "Инженер-программист, СВФУ; сейчас между Якутском и Цзямусским университетом в Китае. Дальняя цель — магистратура в Шэньчжэне или Гуанчжоу.",
+    en: "Computer engineering at NEFU. The long game is graduate study in AI in southern China.",
+    ru: "Инженер-программист, СВФУ. Дальняя цель — магистратура по AI на юге Китая.",
   } satisfies LS,
   toolchain: [
     "Python",

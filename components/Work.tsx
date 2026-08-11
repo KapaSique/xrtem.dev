@@ -8,18 +8,27 @@ import { useLang } from "@/lib/i18n";
 
 const liveCount = works.filter((w) => w.status === "live").length;
 
+/** Russian needs three forms: 1 проект, 2 проекта, 5 проектов. */
+function pluralRu(n: number, one: string, few: string, many: string) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+  return many;
+}
+
 export function WorkSection() {
   const { t } = useLang();
   const [active, setActive] = useState(0);
 
   return (
-    <section id="work" className="shell scroll-mt-24 pt-28 md:pt-40">
+    <section id="work" className="shell scroll-mt-24 pt-24 md:pt-32">
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-b border-line pb-5">
         <h2 className="label !text-ink">{t({ en: "Selected work", ru: "Избранные работы" })}</h2>
         <span className="label">
           {t({
             en: `${works.length} projects · ${liveCount} in production`,
-            ru: `${works.length} проекта · ${liveCount} в проде`,
+            ru: `${works.length} ${pluralRu(works.length, "проект", "проекта", "проектов")} · ${liveCount} в проде`,
           })}
         </span>
       </div>
@@ -82,7 +91,7 @@ function Row({
         href={work.href}
         target="_blank"
         rel="noreferrer"
-        className="group block py-10 transition-opacity duration-700 md:py-14 lg:opacity-45 lg:data-[active=true]:opacity-100"
+        className="group block py-9 transition-opacity duration-700 md:py-11 lg:opacity-55 lg:data-[active=true]:opacity-100"
         data-active={active}
       >
         <div className="flex items-baseline justify-between gap-6">
@@ -103,8 +112,8 @@ function Row({
           <Media work={work} />
         </div>
 
-        <p className="mt-7 max-w-[54ch] text-[1.0625rem] leading-[1.62] text-ink-soft">{t(work.summary)}</p>
-        <p className="mt-4 max-w-[54ch] text-[0.9375rem] leading-[1.65] text-ink-mute">{t(work.note)}</p>
+        <p className="mt-7 max-w-[58ch] text-[1.0625rem] leading-[1.62] text-ink-soft">{t(work.summary)}</p>
+        <p className="mt-4 max-w-[58ch] text-[0.9375rem] leading-[1.65] text-ink-mute">{t(work.note)}</p>
 
         <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
           {work.stack.map((item) => (
