@@ -22,6 +22,21 @@
   --color-line-2: rgba(21, 20, 15, 0.34);
   --color-live: #4f7a52;
 
+  /* ---- Variant 2: premium graphite. Never pure black — #101114 is the
+     floor, and surfaces step up from it so depth comes from elevation
+     rather than from borders. ---- */
+  --color-graphite-950: #101114;
+  --color-graphite-900: #17181c;
+  --color-graphite-850: #1c1e23;
+  --color-graphite-800: #23262c;
+  --color-graphite-700: #2f333a;
+  --color-mist-100: #f3f4f6;
+  --color-mist-300: #b7bbc3;
+  --color-mist-500: #868b94;
+  --color-mist-700: #5b606a;
+  --color-champagne: #c6a87d;
+  --color-champagne-dim: #8d7857;
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   --spacing-gutter: clamp(1.25rem, 4.5vw, 5rem);
@@ -132,6 +147,56 @@
   .link-draw:hover::after,
   .link-draw:focus-visible::after {
     transform: scaleX(1);
+  }
+}
+
+/* Variant 2 owns the document background when it is on screen, so overscroll
+   past the top or bottom shows graphite rather than a strip of paper. */
+body:has(.v2-root) {
+  background: var(--color-graphite-900);
+  color: var(--color-mist-100);
+}
+
+/* Type scale for the graphite variant. Tracking is size-specific: display
+   text tightens as it grows, small caps labels open up. */
+.v2-display {
+  font-weight: 500;
+  letter-spacing: -0.038em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.v2-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Press feedback belongs on pointer-down, not on release. */
+.press {
+  transition: transform 120ms var(--ease-out-expo);
+}
+.press:active {
+  transform: scale(0.975);
+}
+
+@keyframes v2drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6%, 4%, 0) scale(1.12);
+  }
+}
+
+@keyframes v2sweep {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: -220% 50%;
   }
 }
 

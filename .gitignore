@@ -9,3 +9,7 @@ build
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+
+# browser tooling artefacts
+.claude/browser-logs/
+*.log
