@@ -173,7 +173,7 @@ export const works: Work[] = [
 ];
 
 export const numbers = {
-  heading: { en: "Measured, not claimed", ru: "Измерено, а не заявлено" } satisfies LS,
+  heading: { en: "Numbers you can check", ru: "Цифры, которые можно проверить" } satisfies LS,
   caption: {
     en: "Every figure below is reproducible from a public repository.",
     ru: "Каждое число ниже воспроизводится из публичного репозитория.",

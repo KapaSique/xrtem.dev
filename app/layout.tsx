@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n";
 import "./globals.css";
 
@@ -13,6 +13,13 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
   weight: ["400"],
   variable: "--font-jetbrains",
+  display: "swap",
+});
+
+/** Wordmark face. Latin only — it is never asked to set Cyrillic. */
+const grotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-grotesk",
   display: "swap",
 });
 
@@ -55,13 +62,21 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17181c",
-  colorScheme: "dark",
+  themeColor: "#f1f2f6",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${grotesk.variable}`}>
+      <head>
+        {/* Entrance animations are applied from the client. Without
+            scripting they would leave the page blank, so the hidden
+            state is cancelled outright. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="antialiased">
         <LanguageProvider>{children}</LanguageProvider>
       </body>

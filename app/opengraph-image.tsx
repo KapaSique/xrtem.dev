@@ -14,10 +14,10 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#17181c",
+          background: "#f1f2f6",
           backgroundImage:
-            "radial-gradient(ellipse 70% 60% at 22% -10%, rgba(198,168,125,0.30) 0%, transparent 62%)",
-          color: "#f3f4f6",
+            "radial-gradient(ellipse 85% 90% at 88% 10%, #ffffff 0%, #c8cdd8 34%, #8d95a8 58%, rgba(241,242,246,0) 82%)",
+          color: "#08090c",
           padding: "64px 72px",
           fontFamily: "sans-serif",
         }}
@@ -29,13 +29,13 @@ export default function OpengraphImage() {
             fontSize: 19,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#868b94",
-            borderBottom: "1px solid rgba(255,255,255,0.12)",
+            color: "#7a8194",
+            borderBottom: "1px solid rgba(8,9,12,0.14)",
             paddingBottom: 24,
           }}
         >
           <span>xrtem.dev</span>
-          <span style={{ color: "#c6a87d" }}>5 projects in production</span>
+          <span style={{ color: "#08090c" }}>5 projects in production</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
               fontSize: 76,
               letterSpacing: "-0.04em",
               lineHeight: 1.05,
-              color: "#c6a87d",
+              color: "#7a8194",
             }}
           >
             from the experiment
@@ -64,13 +64,13 @@ export default function OpengraphImage() {
             justifyContent: "space-between",
             alignItems: "flex-end",
             fontSize: 21,
-            color: "#b7bbc3",
-            borderTop: "1px solid rgba(255,255,255,0.12)",
+            color: "#454b5a",
+            borderTop: "1px solid rgba(8,9,12,0.14)",
             paddingTop: 24,
           }}
         >
           <span>Artem Svinoboev · full-stack · ML / computer vision</span>
-          <span style={{ color: "#868b94" }}>Yakutsk · UTC+9</span>
+          <span style={{ color: "#7a8194" }}>Yakutsk · UTC+9</span>
         </div>
       </div>
     ),

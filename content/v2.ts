@@ -21,8 +21,8 @@ export const v2hero = {
   } satisfies LS,
   /** Three parts so the middle one can carry the accent gradient. */
   headline: {
-    en: ["I take it all the way —", "from the experiment", "to the thing people use."],
-    ru: ["Довожу до конца —", "от эксперимента", "до вещи, которой пользуются."],
+    en: ["I build products", "people open", "every single day."],
+    ru: ["Собираю продукты,", "которые открывают", "каждый день."],
   },
   sub: {
     en: "Commercial storefronts, multi-tenant platforms and ML systems that report their own limits. Five of them are in production right now.",
@@ -99,8 +99,8 @@ export const v2services = {
 export const v2work = {
   label: { en: "Selected work", ru: "Избранные работы" } satisfies LS,
   heading: {
-    en: "Shipped, not mocked up.",
-    ru: "Отгружено, а не нарисовано.",
+    en: "Five things I built.",
+    ru: "Пять вещей, которые я построил.",
   } satisfies LS,
 };
 
