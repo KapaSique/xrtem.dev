@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n";
+import { ThemeProvider, themeBootScript } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -62,14 +63,25 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f1f2f6",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f1f2f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1015" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${grotesk.variable}`}>
+    // The boot script writes data-theme before React hydrates, so the
+    // server markup never carries it — that mismatch is intended.
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrains.variable} ${grotesk.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        {/* Resolves the theme before the first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
         {/* Entrance animations are applied from the client. Without
             scripting they would leave the page blank, so the hidden
             state is cancelled outright. */}
@@ -78,7 +90,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body className="antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

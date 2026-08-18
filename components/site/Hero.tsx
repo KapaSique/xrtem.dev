@@ -130,7 +130,7 @@ export function Hero() {
                 {hero.stats.map((stat) => (
                   <div
                     key={stat.value}
-                    className="rounded-2xl bg-white/45 px-3 py-3.5 text-center"
+                    className="rounded-2xl bg-raise/45 px-3 py-3.5 text-center"
                   >
                     <div className="grotesk text-lg text-graphite-900">{stat.value}</div>
                     <div className="label mt-1.5 leading-[1.5] text-graphite-400">
@@ -158,7 +158,7 @@ export function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 title={item.name}
-                className="group relative rounded-full px-3 py-2.5 text-[0.8125rem] text-graphite-600 transition-all duration-300 hover:bg-white/70 hover:text-graphite-900 sm:px-4"
+                className="group relative rounded-full px-3 py-2.5 text-[0.8125rem] text-graphite-600 transition-all duration-300 hover:bg-raise/70 hover:text-graphite-900 sm:px-4"
               >
                 {item.name.replace(/\.(com|app|dev)$/, "")}
               </a>

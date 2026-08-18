@@ -33,7 +33,7 @@ export function Services() {
               <div
                 onMouseEnter={() => setActive(item.id)}
                 onFocusCapture={() => setActive(item.id)}
-                className="group rounded-3xl transition-colors duration-500 hover:bg-white/45"
+                className="group rounded-3xl transition-colors duration-500 hover:bg-raise/45"
               >
                 <div className="flex cursor-default items-baseline gap-4 px-4 py-5 md:gap-8 md:px-6">
                   <span

@@ -26,7 +26,7 @@ export function Faq() {
           const isOpen = open === i;
           return (
             <Reveal key={i} delay={i * 0.05}>
-              <div className="rounded-3xl transition-colors duration-500 hover:bg-white/40">
+              <div className="rounded-3xl transition-colors duration-500 hover:bg-raise/40">
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -103,7 +103,7 @@ export function Cta() {
               href={identity.telegram.href}
               target="_blank"
               rel="noreferrer"
-              className="r-pill press inline-flex items-center border border-silver-50/25 bg-white/10 px-6 py-3.5 text-sm text-silver-100 backdrop-blur-md transition-colors duration-300 hover:bg-white/20"
+              className="r-pill press inline-flex items-center border border-silver-50/25 bg-silver-50/10 px-6 py-3.5 text-sm text-silver-100 backdrop-blur-md transition-colors duration-300 hover:bg-silver-50/20"
             >
               {t(v2cta.secondary)}
             </a>

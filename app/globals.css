@@ -26,9 +26,43 @@
 
   --color-live: #17a34a;
 
+  /* Lift inside a glass pane. White on the light theme; on the dark one
+     it becomes a pale grey, since white would blow the panel out. */
+  --color-raise: #ffffff;
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   /* iOS-style overshoot, used on anything that pops into place. */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ------------------------------------------------------------------ *
+ * Dark theme
+ *
+ * Only the token values change — every `text-graphite-900` and
+ * `bg-silver-100` in the markup inverts along with them. The scale
+ * keeps its meaning: 900 is always the most contrasting against the
+ * page, 100 is always the page itself.
+ * ------------------------------------------------------------------ */
+[data-theme="dark"] {
+  --color-silver-50: #0b0c10;
+  --color-silver-100: #0e1015;
+  --color-silver-200: #171a22;
+  --color-silver-300: #232734;
+  --color-silver-400: #333a4a;
+
+  /* Not a mirror of the light scale: the mid tones are pushed lighter
+     than inversion would give, or the mono micro-labels drop under 3:1
+     against the page and stop being readable. */
+  --color-graphite-900: #f3f5f9;
+  --color-graphite-800: #dfe4ec;
+  --color-graphite-600: #b0b8c7;
+  --color-graphite-400: #8f98aa;
+  --color-graphite-300: #767f91;
+
+  --color-live: #34d17e;
+  --color-raise: #6f7a8f;
+
+  color-scheme: dark;
 }
 
 @layer base {
@@ -127,7 +161,29 @@
     box-shadow:
       0 1px 0 0 rgb(255 255 255 / 0.85) inset,
       0 -1px 1px 0 rgb(140 148 165 / 0.16) inset;
+
+  /* Dark theme glass. The pane can no longer be "white, less opaque" —
+     on a dark backdrop that reads as fog. It becomes a faint cool tint
+     with a brighter top edge, and the specular catch does the work. */
+  [data-theme="dark"] & {
+    /* Denser than the light pane. A thin tint lets bright veins of the
+       metal through and drags text contrast down wherever one passes
+       underneath, so the dark glass carries its own body. */
+    background: linear-gradient(
+      160deg,
+      rgb(19 22 30 / 0.66) 0%,
+      rgb(19 22 30 / 0.54) 42%,
+      rgb(19 22 30 / 0.62) 100%
+    );
+    backdrop-filter: blur(28px) saturate(140%) brightness(0.8);
+    -webkit-backdrop-filter: blur(28px) saturate(140%) brightness(0.8);
+    border-color: rgb(196 212 244 / 0.15);
+    box-shadow:
+      0 1px 0 0 rgb(214 228 255 / 0.18) inset,
+      0 -1px 1px 0 rgb(0 0 0 / 0.34) inset;
   }
+}
+
 
   /* Darker pane for anything that needs to hold white type. */
   .glass-dark {
@@ -142,6 +198,20 @@
     -webkit-backdrop-filter: blur(30px) saturate(160%);
     border: 1px solid rgb(255 255 255 / 0.16);
     box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.22) inset;
+
+    /* This is the page's one high-contrast plate, so on the dark theme
+       it flips to light. Its type uses silver-* tokens, which invert
+       alongside it and stay legible without touching the markup. */
+    [data-theme="dark"] & {
+      background: linear-gradient(
+        160deg,
+        rgb(236 240 248 / 0.95) 0%,
+        rgb(224 230 242 / 0.9) 48%,
+        rgb(236 240 248 / 0.94) 100%
+      );
+      border-color: rgb(12 14 20 / 0.1);
+      box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.9) inset;
+    }
   }
 
   /* Continuous-corner radii. iOS never uses a small radius on a large
@@ -169,6 +239,11 @@
     box-shadow:
       0 1px 0 0 rgb(255 255 255 / 0.95) inset,
       0 -1px 1px 0 rgb(140 148 165 / 0.2) inset;
+  }
+  [data-theme="dark"] .lift:hover {
+    box-shadow:
+      0 1px 0 0 rgb(214 228 255 / 0.3) inset,
+      0 -1px 1px 0 rgb(0 0 0 / 0.36) inset;
   }
 
   .press {

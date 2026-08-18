@@ -52,7 +52,7 @@ export function Nav() {
                 onClick={() => setOpen((v) => !v)}
                 aria-expanded={open}
                 aria-label={open ? "Close menu" : "Open menu"}
-                className="press relative grid h-10 w-10 place-items-center rounded-full border border-graphite-900/12 bg-white/60 text-graphite-900 transition-colors duration-300 hover:bg-white/85"
+                className="press relative grid h-10 w-10 place-items-center rounded-full border border-graphite-900/12 bg-raise/60 text-graphite-900 transition-colors duration-300 hover:bg-raise/85"
               >
                 <span className="relative block h-[9px] w-[15px]">
                   <span
@@ -79,8 +79,7 @@ export function Nav() {
         }`}
       >
         <div
-          className="absolute inset-0 backdrop-blur-3xl"
-          style={{ background: "rgba(241,242,246,0.72)" }}
+          className="absolute inset-0 bg-silver-100/75 backdrop-blur-3xl"
           onClick={() => setOpen(false)}
         />
 
@@ -92,7 +91,7 @@ export function Nav() {
                 href={`#${item.id}`}
                 onClick={() => setOpen(false)}
                 style={{ transitionDelay: open ? `${120 + i * 50}ms` : "0ms" }}
-                className={`group flex items-center gap-5 rounded-3xl px-4 py-[clamp(0.55rem,1.5vw,1rem)] transition-all duration-700 hover:bg-white/60 ${
+                className={`group flex items-center gap-5 rounded-3xl px-4 py-[clamp(0.55rem,1.5vw,1rem)] transition-all duration-700 hover:bg-raise/60 ${
                   open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
                 }`}
               >
@@ -148,7 +147,7 @@ export function Nav() {
                   aria-pressed={lang === code}
                   className={`label rounded-full px-3.5 py-2 transition-all duration-400 ${
                     lang === code
-                      ? "bg-white text-graphite-900 shadow-[0_1px_3px_-1px_rgba(20,24,34,0.14)]"
+                      ? "bg-silver-50 text-graphite-900 shadow-[0_1px_3px_-1px_rgba(20,24,34,0.14)]"
                       : "text-graphite-400 hover:text-graphite-600"
                   }`}
                 >
@@ -188,7 +187,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="label rounded-full bg-white/50 px-3.5 py-2 text-graphite-600 transition-colors duration-300 hover:bg-white/90 hover:text-graphite-900"
+                className="label rounded-full bg-raise/50 px-3.5 py-2 text-graphite-600 transition-colors duration-300 hover:bg-raise/90 hover:text-graphite-900"
               >
                 {link.handle}
               </a>

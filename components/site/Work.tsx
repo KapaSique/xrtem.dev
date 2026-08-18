@@ -94,7 +94,7 @@ export function Work() {
                     {work.stack.map((tech) => (
                       <li
                         key={tech}
-                        className="label rounded-full bg-white/55 px-3 py-1.5 text-graphite-600"
+                        className="label rounded-full bg-raise/55 px-3 py-1.5 text-graphite-600"
                       >
                         {tech}
                       </li>
