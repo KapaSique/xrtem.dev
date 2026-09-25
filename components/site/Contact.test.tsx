@@ -27,13 +27,13 @@ describe("Contact", () => {
     expect(screen.getByText("Якутск, YKS 12:04")).toBeInTheDocument();
   });
 
-  test("the glass blends straight against the footer background", () => {
+  test("reuses the new film in the footer", () => {
     const { container } = renderWithLang(<Contact />);
     const footer = container.querySelector("footer#contact")!;
-    expect(footer.querySelector(".mix-blend-lighten")?.parentElement).toBe(footer);
+    expect(footer.querySelector("video source:last-child")).toHaveAttribute("src", "/media/metalab/desktop.mp4");
   });
 
-  test("its glass loop waits until it is near", () => {
+  test("the footer video does not preload", () => {
     const { container } = renderWithLang(<Contact />);
     expect(container.querySelector("video")).toHaveAttribute("preload", "none");
   });

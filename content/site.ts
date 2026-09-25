@@ -32,7 +32,8 @@ export const ui = {
   projects: { en: "Projects", ru: "Проекты" },
   writeEmail: { en: "Write an email", ru: "Написать на почту" },
   open: { en: "Open", ru: "Открыть" },
-  privateAccess: { en: "Private access", ru: "Закрытый доступ" },
+  selectedWork: { en: "Selected work", ru: "Избранные проекты" },
+  menuWork: { en: "Projects", ru: "Проекты" },
 } satisfies Record<string, LS>;
 
 export const hero = {
@@ -51,9 +52,8 @@ export const hero = {
   status: { en: "Taking projects this autumn", ru: "Принимаю проекты на осень" } satisfies LS,
 };
 
-/** Rendered in Blender, see blender/. */
+/** The remaining glass still is used in the About section and Open Graph image. */
 export const glass = {
-  loop: { webm: "/media/glass/x-loop.webm", mp4: "/media/glass/x-loop.mp4" },
   poster: { avif: "/media/glass/x-poster.avif", jpg: "/media/glass/x-poster.jpg" },
   macro: { avif: "/media/glass/x-macro.avif", jpg: "/media/glass/x-macro.jpg" },
 };
@@ -67,7 +67,7 @@ export const marquee: LS[] = [
   { en: "Integrations", ru: "Интеграции" },
 ];
 
-export type WorkId = "chaseje" | "saqaomuk" | "control-tower";
+export type WorkId = "saqaomuk" | "profcosmetic" | "chaseje";
 
 export type Work = {
   id: WorkId;
@@ -75,48 +75,50 @@ export type Work = {
   title: string;
   kind: LS;
   year: string;
-  link: { href: string; label: string } | null;
-  media: { kind: "image"; src: string; alt: LS } | { kind: "panel" };
+  link: { href: string; label: string };
+  media: { src: string; alt: LS };
 };
 
 export const works: Work[] = [
   {
-    id: "chaseje",
-    index: "01",
-    title: "Chase.je",
-    kind: { en: "Archive boutique · e-commerce", ru: "Бутик-архив · e-commerce" },
-    year: "2026",
-    link: { href: "https://chaseje.com", label: "chaseje.com" },
-    media: {
-      kind: "image",
-      src: "/media/chase/boutique.jpg",
-      alt: { en: "Chase.je home page", ru: "Главная Chase.je" },
-    },
-  },
-  {
     id: "saqaomuk",
-    index: "02",
+    index: "01",
     title: "SAQAOMUK",
     kind: { en: "Fashion · storefront", ru: "Fashion · витрина" },
     year: "2026",
     link: { href: "https://saqaomuk.com", label: "saqaomuk.com" },
     media: {
-      kind: "image",
       src: "/media/saqa/storefront.jpg",
       alt: { en: "SAQAOMUK storefront", ru: "Витрина SAQAOMUK" },
     },
   },
   {
-    id: "control-tower",
-    index: "03",
-    title: "Control Tower",
-    kind: { en: "Dashboard · 1C → Next.js", ru: "Дашборд · 1С → Next.js" },
+    id: "profcosmetic",
+    index: "02",
+    title: "PROFCOSMETIC",
+    kind: { en: "Beauty · digital and design", ru: "Бьюти · digital и дизайн" },
     year: "2026",
-    link: null,
-    media: { kind: "panel" },
+    link: { href: "https://profcosmetic.dev", label: "profcosmetic.dev" },
+    media: {
+      src: "/media/profcosmetic/tefia-ollin-promo.jpg",
+      alt: { en: "TEFIA and OLLIN campaign design for Profcosmetic", ru: "Промодизайн TEFIA и OLLIN для Profcosmetic" },
+    },
+  },
+  {
+    id: "chaseje",
+    index: "03",
+    title: "Chase.je",
+    kind: { en: "Archive boutique · e-commerce", ru: "Бутик-архив · e-commerce" },
+    year: "2026",
+    link: { href: "https://chaseje.com", label: "chaseje.com" },
+    media: {
+      src: "/media/chase/boutique.jpg",
+      alt: { en: "Chase.je home page", ru: "Главная Chase.je" },
+    },
   },
 ];
 
+/** A small private platform preview used in the About sentence. */
 export const controlTower = {
   label: { en: "Control Tower dashboard preview", ru: "Control Tower: превью дашборда" } satisfies LS,
   revenue: { en: "Revenue · 30 days", ru: "Выручка · 30 дней" } satisfies LS,

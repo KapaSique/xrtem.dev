@@ -1,4 +1,4 @@
-import { screen, within } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { Work } from "@/components/site/Work";
 import { renderWithLang } from "@/test/render";
@@ -7,8 +7,8 @@ describe("Work", () => {
   test("shows exactly the three cases, anchored for the hero pills", () => {
     const { container } = renderWithLang(<Work />);
     const ids = Array.from(container.querySelectorAll("article")).map((a) => a.id);
-    expect(ids).toEqual(["chaseje", "saqaomuk", "control-tower"]);
-    expect(screen.getByRole("heading", { level: 3, name: "Chase.je" })).toBeInTheDocument();
+    expect(ids).toEqual(["saqaomuk", "profcosmetic", "chaseje"]);
+    expect(screen.getByRole("heading", { level: 3, name: "SAQAOMUK" })).toBeInTheDocument();
   });
 
   test("live cases open their sites in a new tab", () => {
@@ -19,15 +19,12 @@ describe("Work", () => {
     expect(chase).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.getByRole("link", { name: "Открыть chaseje.com" })).toHaveAttribute("href", "https://chaseje.com");
     expect(screen.getByRole("link", { name: "SAQAOMUK — saqaomuk.com" })).toHaveAttribute("href", "https://saqaomuk.com");
+    expect(screen.getByRole("link", { name: "PROFCOSMETIC — profcosmetic.dev" })).toHaveAttribute("href", "https://profcosmetic.dev");
     expect(screen.getByAltText("Витрина SAQAOMUK")).toBeInTheDocument();
   });
 
-  test("Control Tower has no link, only the private-access badge", () => {
+  test("Profcosmetic uses an image from the project", () => {
     const { container } = renderWithLang(<Work />);
-    const tower = container.querySelector("article#control-tower") as HTMLElement;
-    expect(within(tower).queryByRole("link")).toBeNull();
-    expect(within(tower).getByText("Закрытый доступ")).toBeInTheDocument();
-    expect(within(tower).getByRole("img", { name: "Control Tower: превью дашборда" })).toBeInTheDocument();
-    expect(container.innerHTML).not.toMatch(/profcosmetic/i);
+    expect(container.querySelector("article#profcosmetic img")).toHaveAttribute("src", "/media/profcosmetic/tefia-ollin-promo.jpg");
   });
 });

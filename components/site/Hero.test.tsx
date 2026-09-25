@@ -12,9 +12,9 @@ describe("Hero", () => {
   test("links each project pill to its case", () => {
     renderWithLang(<Hero />);
     const nav = screen.getByRole("navigation", { name: "Проекты" });
-    expect(within(nav).getByRole("link", { name: "Chase.je" })).toHaveAttribute("href", "#chaseje");
     expect(within(nav).getByRole("link", { name: "SAQAOMUK" })).toHaveAttribute("href", "#saqaomuk");
-    expect(within(nav).getByRole("link", { name: "Control Tower" })).toHaveAttribute("href", "#control-tower");
+    expect(within(nav).getByRole("link", { name: "PROFCOSMETIC" })).toHaveAttribute("href", "#profcosmetic");
+    expect(within(nav).getByRole("link", { name: "Chase.je" })).toHaveAttribute("href", "#chaseje");
   });
 
   test("introduces itself in its own words", () => {
@@ -27,11 +27,14 @@ describe("Hero", () => {
     expect(screen.getByRole("heading", { level: 1, name: "I build sites people open" })).toBeInTheDocument();
   });
 
-  test("the glass blends straight against the hero background", () => {
+  test("uses the supplied desktop and mobile background videos", () => {
     const { container } = renderWithLang(<Hero />);
     const section = container.querySelector("section#top")!;
-    // Any wrapper in between would isolate the blend and show the video's black square.
-    expect(section.querySelector(".mix-blend-lighten")?.parentElement).toBe(section);
+    const sources = Array.from(section.querySelectorAll("video source"));
+    expect(sources.map((source) => source.getAttribute("src"))).toEqual([
+      "/media/metalab/mobile.mp4",
+      "/media/metalab/desktop.mp4",
+    ]);
   });
 
   test("gives the changing word its own line on phones", () => {
@@ -41,7 +44,7 @@ describe("Hero", () => {
     expect(br?.nextElementSibling).toHaveClass("italic");
   });
 
-  test("carries the glass loop and the header", () => {
+  test("carries the background video and the header", () => {
     const { container } = renderWithLang(<Hero />);
     expect(container.querySelector("section#top video")).not.toBeNull();
     expect(screen.getByRole("button", { name: "Меню" })).toBeInTheDocument();

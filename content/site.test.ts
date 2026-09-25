@@ -44,12 +44,12 @@ describe("content", () => {
     for (const p of pairs) expect(p.ru, p.path).not.toMatch(/,\s*а не\s/i);
   });
 
-  test("exactly three works, and only Control Tower goes without a link", () => {
-    expect(site.works.map((w) => w.id)).toEqual(["chaseje", "saqaomuk", "control-tower"]);
+  test("the three linked projects are in the requested order", () => {
+    expect(site.works.map((w) => w.id)).toEqual(["saqaomuk", "profcosmetic", "chaseje"]);
     expect(site.works.find((w) => w.id === "chaseje")?.link?.href).toBe("https://chaseje.com");
     expect(site.works.find((w) => w.id === "saqaomuk")?.link?.href).toBe("https://saqaomuk.com");
-    expect(site.works.find((w) => w.id === "control-tower")?.link).toBeNull();
-    expect(JSON.stringify(site)).not.toMatch(/profcosmetic\.dev|petmek|trustlens/i);
+    expect(site.works.find((w) => w.id === "profcosmetic")?.link?.href).toBe("https://profcosmetic.dev");
+    expect(site.works.every((w) => w.link)).toBe(true);
   });
 
   test("the layout gets the counts it is built for", () => {

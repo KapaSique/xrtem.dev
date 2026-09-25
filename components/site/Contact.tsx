@@ -3,7 +3,7 @@
 import { contact, identity } from "@/content/site";
 import { useLang } from "@/lib/i18n";
 import { useYakutskTime } from "@/lib/useYakutskTime";
-import { GlassLoop } from "./GlassLoop";
+import { BackgroundVideo } from "./BackgroundVideo";
 import { ArrowIcon } from "./icons";
 import { Reveal } from "./Reveal";
 
@@ -13,12 +13,8 @@ export function Contact() {
 
   return (
     <footer id="contact" className="relative isolate flex min-h-[700px] flex-col overflow-hidden bg-ink text-fg md:min-h-[1100px]">
-      {/* The same loop as the hero, twice the size and cut by the page's edge. */}
-      <GlassLoop
-        lazy
-        className="pointer-events-none absolute bottom-[-38%] left-1/2 aspect-square w-[170vw] -translate-x-1/2 md:bottom-[-48%] md:w-[min(120vw,1700px)]"
-      />
-      <div aria-hidden="true" className="xr-grain pointer-events-none absolute -inset-10 opacity-[0.16] mix-blend-overlay" />
+      <BackgroundVideo lazy className="pointer-events-none absolute inset-0 opacity-70" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink/30" />
 
       <div className="relative flex grow flex-col px-4 pt-28 md:px-6 md:pt-[180px]">
         <Reveal>

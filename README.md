@@ -3,8 +3,9 @@
 Portfolio of **Artem Svinoboev** — full-stack work for brands and businesses:
 sites, stores, platforms and Telegram bots, taken all the way to real users.
 
-One dark page: a glass **x** rendered in Blender, three cases, services and
-contacts. Russian by default, English one click away in the menu.
+An immersive video homepage, three selected cases, services and contacts.
+The menu opens into a light project index. Russian by default, English one
+click away in the menu.
 
 ## Stack
 
@@ -14,14 +15,22 @@ contacts. Russian by default, English one click away in the menu.
 | Styling | Tailwind CSS v4 — tokens in `@theme`, motion as CSS keyframes (`app/globals.css`) |
 | Type | Cormorant Garamond · Onest · JetBrains Mono |
 | Tests | Vitest + Testing Library — `npm test` |
-| 3D | Blender 5 + LuxCore → looping video |
+| Media | Separate desktop and mobile MP4 backgrounds, with still fallbacks |
 
 ## Content
 
 Every string lives in [`content/site.ts`](content/site.ts) as an `{ en, ru }` pair.
 `content/site.test.ts` refuses an empty translation and the «X, а не Y» construction.
 
-## The glass x
+## Background video
+
+The first screen and contact section use the supplied desktop and mobile
+background films in `public/media/metalab/`. `BackgroundVideo` chooses the
+mobile crop below 768px, reselects on resize, and uses still frames when the
+visitor requests reduced motion or data saving. The footer waits until it is
+near the viewport before playing.
+
+## Earlier glass stills
 
 The scene is code: [`blender/x_scene.py`](blender/x_scene.py) builds the geometry,
 the studio (a generated HDR), the glass and the camera. LuxCore gives real spectral
@@ -34,10 +43,8 @@ blender/render.sh macro luxcore --budget 600 # the About close-up
 blender/encode.sh blender/out/loop-luxcore blender/out/macro-luxcore.png
 ```
 
-`encode.sh` writes `webm` + `mp4` + AVIF/JPEG stills into `public/media/glass/` and
-the favicon into `app/icon.png`. Frames render over a transparent film and are laid
-on pure black; the page blends the video with `lighten`, so the codec's blacks never
-show as a rectangle.
+The retained macro image is used in About; the poster still supplies the Open
+Graph image. The original loop is no longer loaded by the site.
 
 LuxCore note: pyluxcore 2.11.2 sRGB-encodes float environment maps on load, which
 `x_scene.py` undoes with `world.luxcore.gamma = 2.2`.

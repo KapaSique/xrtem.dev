@@ -35,7 +35,7 @@ export function Header() {
         {identity.wordmark}
       </a>
       <div className="flex items-center gap-3.5 text-[14px]">
-        <span className="tabular-nums">YKS {time ?? "--:--"}</span>
+        <span className="hidden tabular-nums min-[380px]:inline">YKS {time ?? "--:--"}</span>
         <a
           href={`mailto:${identity.email}`}
           aria-label={t(ui.writeEmail)}

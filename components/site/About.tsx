@@ -7,7 +7,7 @@ import { Counter } from "./Counter";
 import { Reveal } from "./Reveal";
 
 const saqa = works.find((work) => work.id === "saqaomuk");
-const saqaSrc = saqa && saqa.media.kind === "image" ? saqa.media.src : "";
+const saqaSrc = saqa?.media.src ?? "";
 
 /** A picture set into the line of type, sized in em so it scales with it. */
 function Pill({ children }: { children: React.ReactNode }) {

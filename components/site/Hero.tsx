@@ -2,7 +2,7 @@
 
 import { hero, ui, works } from "@/content/site";
 import { useLang } from "@/lib/i18n";
-import { GlassLoop } from "./GlassLoop";
+import { BackgroundVideo } from "./BackgroundVideo";
 import { Header } from "./Header";
 import { ScrambleWord } from "./ScrambleWord";
 
@@ -30,19 +30,19 @@ export function Hero() {
       id="top"
       className="relative isolate flex min-h-[max(780px,100svh)] flex-col overflow-hidden bg-ink text-fg md:min-h-[max(760px,100svh)]"
     >
-      <GlassLoop className="pointer-events-none absolute left-1/2 top-[110px] aspect-square w-[104vw] -translate-x-1/2 md:left-auto md:right-[-4%] md:top-[6%] md:w-[min(88svh,62vw)] md:translate-x-0" />
-      <div aria-hidden="true" className="xr-grain pointer-events-none absolute -inset-10 opacity-[0.16] mix-blend-overlay" />
+      <BackgroundVideo className="pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,12,.52),rgba(5,4,12,.06)_38%,rgba(5,4,12,.42)_100%)]" />
 
       <Header />
 
       <p
-        className="xr-ch relative ml-auto mt-3 w-[220px] px-4 text-[14px] leading-[1.4] md:absolute md:left-[62.6%] md:top-[200px] md:m-0 md:w-[236px] md:px-0 md:text-[16px]"
+        className="xr-ch relative ml-auto mt-12 w-[240px] px-4 text-[14px] leading-[1.4] md:absolute md:left-[59%] md:top-[24%] md:m-0 md:w-[290px] md:px-0 md:text-[16px]"
         style={{ animationDelay: "1.1s" }}
       >
         {t(hero.intro)}
       </p>
 
-      <h1 className="relative mt-auto px-4 font-display text-[60px] font-light leading-[56px] tracking-[-0.035em] md:absolute md:left-[29.9%] md:top-[52%] md:mt-0 md:px-0 md:text-[clamp(64px,8.9vw,128px)] md:leading-[0.97]">
+      <h1 className="relative mt-auto px-4 font-display text-[clamp(56px,15vw,82px)] font-light leading-[0.9] tracking-[-0.04em] md:absolute md:left-[30%] md:top-[57%] md:mt-0 md:px-0 md:text-[clamp(72px,8.9vw,136px)] md:leading-[0.86]">
         <span className="sr-only">{`${one} ${two} ${words[0]}`}</span>
         <span aria-hidden="true" className="block whitespace-nowrap">
           <Rise text={one} start={0.35} />
@@ -60,7 +60,7 @@ export function Hero() {
 
       <nav
         aria-label={t(ui.projects)}
-        className="relative mt-6 flex flex-wrap gap-2 px-4 pb-8 md:absolute md:left-6 md:top-[240px] md:mt-0 md:flex-col md:items-start md:px-0 md:pb-0"
+        className="relative mt-9 flex flex-wrap gap-2 px-4 pb-9 md:absolute md:left-6 md:top-[30%] md:mt-0 md:flex-col md:items-start md:px-0 md:pb-0"
       >
         {works.map((work, i) => (
           <a

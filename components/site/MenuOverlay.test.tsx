@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import { MenuOverlay } from "@/components/site/MenuOverlay";
 import { renderWithLang } from "@/test/render";
@@ -32,6 +32,16 @@ describe("MenuOverlay", () => {
     expect(link).toHaveAttribute("href", "#work");
     fireEvent.click(link);
     expect(onClose).toHaveBeenCalledOnce();
+  });
+
+  test("lists the three projects in the requested order", () => {
+    renderWithLang(<MenuOverlay open onClose={() => {}} />);
+    const projects = within(screen.getByRole("navigation", { name: "Проекты" })).getAllByRole("link");
+    expect(projects.map((link) => link.getAttribute("href"))).toEqual([
+      "#saqaomuk",
+      "#profcosmetic",
+      "#chaseje",
+    ]);
   });
 
   test("switches the whole page to English", () => {
