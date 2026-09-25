@@ -1,0 +1,3 @@
+# Local render frames and plan scratch never ship; the site needs only its sources and public/.
+blender/out
+.superpowers
