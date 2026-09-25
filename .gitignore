@@ -13,3 +13,7 @@ next-env.d.ts
 # browser tooling artefacts
 .claude/browser-logs/
 *.log
+
+# 3D renders and tooling artefacts
+blender/out/
+.playwright-mcp/

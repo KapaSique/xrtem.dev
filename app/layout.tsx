@@ -1,98 +1,71 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Cormorant_Garamond, JetBrains_Mono, Onest } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n";
-import { ThemeProvider, themeBootScript } from "@/lib/theme";
 import "./globals.css";
 
-const inter = Inter({
+const display = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
+const sans = Onest({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500"],
+  variable: "--font-onest",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
   weight: ["400"],
   variable: "--font-jetbrains",
   display: "swap",
 });
 
-/** Wordmark face. Latin only — it is never asked to set Cyrillic. */
-const grotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-grotesk",
-  display: "swap",
-});
-
+const title = "xrtem — сайты и продукты под ключ";
 const description =
-  "Artem Svinoboev — machine learning, computer vision and full-stack engineering. Commercial storefronts, multi-tenant platforms and research that reports its own limits.";
+  "Артём Свинобоев — fullstack-разработчик из Якутска. Сайты, интернет-магазины, платформы и Telegram-боты под ключ: от макета до админки и реальных пользователей.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://xrtem.dev"),
-  title: {
-    default: "Artem Svinoboev — ML, CV and full-stack engineering",
-    template: "%s — xrtem.dev",
-  },
+  title: { default: title, template: "%s — xrtem.dev" },
   description,
-  keywords: [
-    "Artem Svinoboev",
-    "machine learning",
-    "computer vision",
-    "full-stack",
-    "Next.js",
-    "portfolio",
-    "Yakutsk",
-  ],
+  keywords: ["Артём Свинобоев", "Artem Svinoboev", "разработка сайтов", "Якутск", "Next.js", "интернет-магазин", "Telegram-бот"],
   authors: [{ name: "Artem Svinoboev", url: "https://github.com/KapaSique" }],
   creator: "Artem Svinoboev",
   openGraph: {
     type: "website",
     url: "https://xrtem.dev",
     siteName: "xrtem.dev",
-    title: "Artem Svinoboev — ML, CV and full-stack engineering",
+    title,
     description,
-    locale: "en_US",
-    alternateLocale: "ru_RU",
+    locale: "ru_RU",
+    alternateLocale: "en_US",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Artem Svinoboev — ML, CV and full-stack engineering",
-    description,
-  },
+  twitter: { card: "summary_large_image", title, description },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f1f2f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1015" },
-  ],
-  colorScheme: "light dark",
+  themeColor: "#07060B",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // The boot script writes data-theme before React hydrates, so the
-    // server markup never carries it — that mismatch is intended.
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrains.variable} ${grotesk.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="ru" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <head>
-        {/* Resolves the theme before the first paint. */}
-        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
-        {/* Entrance animations are applied from the client. Without
-            scripting they would leave the page blank, so the hidden
-            state is cancelled outright. */}
+        {/* Entrances are applied from the client; without scripting they would
+            leave sections blank, so the hidden state is cancelled outright. */}
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="antialiased">
-        <ThemeProvider>
-          <LanguageProvider>{children}</LanguageProvider>
-        </ThemeProvider>
+      <body className="bg-ink font-sans text-fg antialiased">
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
