@@ -74,6 +74,8 @@ export type Work = {
   index: string;
   title: string;
   kind: LS;
+  summary: LS;
+  scope: LS[];
   year: string;
   link: { href: string; label: string };
   media: { src: string; alt: LS };
@@ -85,23 +87,41 @@ export const works: Work[] = [
     index: "01",
     title: "SAQAOMUK",
     kind: { en: "Fashion · storefront", ru: "Fashion · витрина" },
+    summary: {
+      en: "I built the brand's online store: collections, catalogue, checkout and integrations with its back-office systems.",
+      ru: "Собрал онлайн-магазин бренда: коллекции, каталог, оформление заказов и интеграции с учётными системами.",
+    },
+    scope: [
+      { en: "Storefront", ru: "Витрина" },
+      { en: "E-commerce", ru: "Интернет-магазин" },
+      { en: "Integrations", ru: "Интеграции" },
+    ],
     year: "2026",
     link: { href: "https://saqaomuk.com", label: "saqaomuk.com" },
     media: {
-      src: "/media/saqa/storefront.jpg",
-      alt: { en: "SAQAOMUK storefront", ru: "Витрина SAQAOMUK" },
+      src: "/media/saqa/editorial.webp",
+      alt: { en: "SAQAOMUK collection campaign", ru: "Съёмка коллекции SAQAOMUK" },
     },
   },
   {
     id: "profcosmetic",
     index: "02",
     title: "PROFCOSMETIC",
-    kind: { en: "Beauty · digital and design", ru: "Бьюти · digital и дизайн" },
+    kind: { en: "Beauty · campaign design", ru: "Бьюти · дизайн кампаний" },
+    summary: {
+      en: "Visuals and promotional layouts for beauty retail, from a campaign image to ready-to-use materials.",
+      ru: "Визуалы и промоматериалы для бьюти-ритейла: от образа кампании до готовых макетов.",
+    },
+    scope: [
+      { en: "Campaigns", ru: "Кампании" },
+      { en: "Visual design", ru: "Визуальный дизайн" },
+      { en: "Print", ru: "Печать" },
+    ],
     year: "2026",
     link: { href: "https://profcosmetic.dev", label: "profcosmetic.dev" },
     media: {
-      src: "/media/profcosmetic/tefia-ollin-promo.jpg",
-      alt: { en: "TEFIA and OLLIN campaign design for Profcosmetic", ru: "Промодизайн TEFIA и OLLIN для Profcosmetic" },
+      src: "/media/profcosmetic/editorial-portrait.png",
+      alt: { en: "Editorial beauty portrait created for Profcosmetic", ru: "Редакционный бьюти-портрет для Profcosmetic" },
     },
   },
   {
@@ -109,6 +129,15 @@ export const works: Work[] = [
     index: "03",
     title: "Chase.je",
     kind: { en: "Archive boutique · e-commerce", ru: "Бутик-архив · e-commerce" },
+    summary: {
+      en: "A restrained online presence for a private archive boutique, built around atmosphere and a clear path to access.",
+      ru: "Сдержанное онлайн-пространство частного бутика-архива: атмосфера и ясный путь к доступу.",
+    },
+    scope: [
+      { en: "Website", ru: "Сайт" },
+      { en: "Art direction", ru: "Арт-дирекшн" },
+      { en: "E-commerce", ru: "E-commerce" },
+    ],
     year: "2026",
     link: { href: "https://chaseje.com", label: "chaseje.com" },
     media: {

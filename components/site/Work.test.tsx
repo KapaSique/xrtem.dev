@@ -20,11 +20,12 @@ describe("Work", () => {
     expect(screen.getByRole("link", { name: "Открыть chaseje.com" })).toHaveAttribute("href", "https://chaseje.com");
     expect(screen.getByRole("link", { name: "SAQAOMUK — saqaomuk.com" })).toHaveAttribute("href", "https://saqaomuk.com");
     expect(screen.getByRole("link", { name: "PROFCOSMETIC — profcosmetic.dev" })).toHaveAttribute("href", "https://profcosmetic.dev");
-    expect(screen.getByAltText("Витрина SAQAOMUK")).toBeInTheDocument();
+    expect(screen.getByAltText("Съёмка коллекции SAQAOMUK")).toBeInTheDocument();
+    expect(screen.getByAltText("Фрагмент интернет-магазина SAQAOMUK")).toBeInTheDocument();
   });
 
   test("Profcosmetic uses an image from the project", () => {
     const { container } = renderWithLang(<Work />);
-    expect(container.querySelector("article#profcosmetic img")).toHaveAttribute("src", "/media/profcosmetic/tefia-ollin-promo.jpg");
+    expect(container.querySelector("article#profcosmetic img")).toHaveAttribute("src", "/media/profcosmetic/editorial-portrait.png");
   });
 });
