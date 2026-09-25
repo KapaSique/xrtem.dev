@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { Lang, LS } from "@/content/site";
 
-const STORAGE_KEY = "xrtem-lang";
+export const STORAGE_KEY = "xrtem-lang";
 
 type Ctx = {
   lang: Lang;
@@ -13,17 +13,23 @@ type Ctx = {
 
 const LangContext = createContext<Ctx | null>(null);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
-
-  // Restore the stored preference, otherwise take the hint from the browser.
-  useEffect(() => {
+function readStored(): Lang | null {
+  try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === "en" || stored === "ru") {
-      setLangState(stored);
-      return;
-    }
-    if (navigator.language.toLowerCase().startsWith("ru")) setLangState("ru");
+    return stored === "en" || stored === "ru" ? stored : null;
+  } catch {
+    return null; // storage blocked: private mode, sandboxed webviews
+  }
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  // The server renders Russian, so the first client render must as well —
+  // English only arrives once a stored choice is read after mount.
+  const [lang, setLangState] = useState<Lang>("ru");
+
+  useEffect(() => {
+    const stored = readStored();
+    if (stored) setLangState(stored);
   }, []);
 
   useEffect(() => {
@@ -32,7 +38,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next);
-    window.localStorage.setItem(STORAGE_KEY, next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // The choice holds for this visit, it just won't persist.
+    }
   }, []);
 
   const t = useCallback((value: LS) => value[lang], [lang]);
