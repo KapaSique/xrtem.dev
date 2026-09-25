@@ -31,6 +31,24 @@ describe("GlassLoop", () => {
     expect(container.querySelector("source")).toHaveAttribute("srcset", glass.poster.avif);
   });
 
+  test("blends at its root, where the caller positions it", () => {
+    // A transform on a wrapper would open a stacking context: lighten would then
+    // blend against the wrapper's empty inside and the black square would show.
+    const { container, unmount } = render(<GlassLoop className="absolute -translate-x-1/2" />);
+    expect(container.firstElementChild).toHaveClass("mix-blend-lighten", "absolute", "-translate-x-1/2");
+    unmount();
+
+    mockReducedMotion(true);
+    const still = render(<GlassLoop className="absolute -translate-x-1/2" />);
+    expect(still.container.firstElementChild).toHaveClass("mix-blend-lighten", "absolute", "-translate-x-1/2");
+  });
+
+  test("takes the caller's width even past the page edge", () => {
+    // Tailwind's reset caps every video at max-width: 100%.
+    const { container } = render(<GlassLoop className="w-[170vw]" />);
+    expect(container.firstElementChild).toHaveClass("max-w-none", "w-[170vw]");
+  });
+
   test("shows the still frame on a data-saver connection", () => {
     mockSaveData(true);
     const { container } = render(<GlassLoop />);

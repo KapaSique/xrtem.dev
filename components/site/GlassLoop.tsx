@@ -20,6 +20,11 @@ type GlassLoopProps = {
  * The glass x, rendered in Blender over pure black and blended with
  * `lighten`: whatever not-quite-black the codec produces loses to the
  * page background, so the video never shows its rectangle.
+ *
+ * The blend sits on the root, so position the loop through `className` and
+ * place it straight inside the section that paints the background. A
+ * transformed or animated wrapper would open its own stacking context, and
+ * lighten would blend against that wrapper's empty inside instead.
  */
 export function GlassLoop({ lazy = false, className = "" }: GlassLoopProps) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -66,9 +71,9 @@ export function GlassLoop({ lazy = false, className = "" }: GlassLoopProps) {
 
   if (still) {
     return (
-      <picture aria-hidden="true" className={`block ${className}`}>
+      <picture aria-hidden="true" className={`block mix-blend-lighten ${className}`}>
         <source srcSet={glass.poster.avif} type="image/avif" />
-        <img src={glass.poster.jpg} alt="" className="h-full w-full object-contain mix-blend-lighten" />
+        <img src={glass.poster.jpg} alt="" className="h-full w-full object-contain" />
       </picture>
     );
   }
@@ -78,7 +83,7 @@ export function GlassLoop({ lazy = false, className = "" }: GlassLoopProps) {
       ref={ref}
       aria-hidden="true"
       tabIndex={-1}
-      className={`object-contain mix-blend-lighten ${className}`}
+      className={`max-w-none object-contain mix-blend-lighten ${className}`}
       poster={glass.poster.jpg}
       muted
       loop

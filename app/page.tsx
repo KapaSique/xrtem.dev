@@ -1,5 +1,9 @@
-import { hero } from "@/content/site";
+import { Hero } from "@/components/site/Hero";
 
 export default function Page() {
-  return <main className="min-h-screen p-6 font-display text-6xl font-light">{hero.lineOne.ru}</main>;
+  return (
+    <main>
+      <Hero />
+    </main>
+  );
 }
