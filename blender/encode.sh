@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Rendered frames -> the web assets the page uses.
 #   blender/encode.sh <loop-frames-dir> <macro.png>
-# Frames are RGBA over a transparent film. Everything is laid on pure black
-# here; the page blends the video with `lighten`, so codec blacks never show.
+# Frames arrive as RGB over black (older RGBA frames are laid on black here too);
+# the page blends the video with `lighten`, so codec blacks never show.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

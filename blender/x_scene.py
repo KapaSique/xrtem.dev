@@ -10,9 +10,12 @@ Modes
     still  a single loop frame (--frame) -> <out> (a .png path), for look-dev
     macro  the close-up for the About card -> <out> (a .png path)
 
-Everything renders over a transparent film on purpose: encode.sh lays the frames
-on pure black and the page blends the video with `lighten`, so whatever black the
-codec produces loses to the page background and no rectangle shows.
+Everything renders over a transparent film (LuxCore then forces a black background)
+and is saved as RGB: the colour already laid over pure black. The page blends the
+video with `lighten`, so whatever black the codec produces loses to the page
+background and no rectangle shows. RGBA would be wrong for LuxCore: its alpha
+counts light seen through the glass as background (about 0.47 inside the x), and
+Blender divides by that alpha before the view transform, which greys the glass.
 """
 import argparse
 import math
@@ -115,8 +118,9 @@ def clear_scene():
 def build_x(scene):
     """Two capsules fused by metaballs; returns the object to spin."""
     mb = bpy.data.metaballs.new("x")
-    mb.resolution = 0.03
-    mb.render_resolution = 0.012
+    # convert() below tessellates at the viewport resolution, so that is the one
+    # that must be fine: at 0.03 the thin studio strips reflect as a saw-tooth.
+    mb.resolution = 0.012
     mb.threshold = 0.6
     for ang in (45, -45):
         e = mb.elements.new(type="CAPSULE")
@@ -131,6 +135,14 @@ def build_x(scene):
     bpy.ops.object.convert(target="MESH")
     obj = bpy.context.active_object
     bpy.ops.object.shade_smooth()
+    # Metaball tessellation leaves slivers: weld them, then one level of
+    # subdivision rounds off what faceting is left.
+    bpy.ops.object.mode_set(mode="EDIT")
+    bpy.ops.mesh.select_all(action="SELECT")
+    bpy.ops.mesh.remove_doubles(threshold=1e-4)
+    bpy.ops.object.mode_set(mode="OBJECT")
+    sub = obj.modifiers.new("round", "SUBSURF")
+    sub.levels = sub.render_levels = 1
 
     tilt = bpy.data.objects.new("tilt", None)
     scene.collection.objects.link(tilt)
@@ -234,7 +246,7 @@ def configure(scene, engine, budget, cam):
     r.resolution_percentage = 100
     r.film_transparent = True
     r.image_settings.file_format = "PNG"
-    r.image_settings.color_mode = "RGBA"
+    r.image_settings.color_mode = "RGB"  # over black; see the module docstring
     scene.view_settings.view_transform = "AgX"
     scene.view_settings.look = "None"
     budget = budget or DEFAULT_BUDGET[engine]
@@ -315,3 +327,8 @@ def main():
 
 
 main()
+# Everything is on disk by now. BlendLuxCore sometimes dies with SIGBUS while
+# Blender unregisters it on quit, and that exit code would stop `render.sh loop
+# && render.sh macro` halfway, so leave before the teardown.
+sys.stdout.flush()
+os._exit(0)

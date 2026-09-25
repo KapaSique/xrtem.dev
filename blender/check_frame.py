@@ -7,7 +7,8 @@ import numpy as np
 path = sys.argv[sys.argv.index("--") + 1]
 im = bpy.data.images.load(path)
 px = np.array(im.pixels[:], dtype=np.float32).reshape(-1, 4)
-cover = float((px[:, 3] > 0.02).mean())
+# Frames are saved as RGB over black, so coverage is whatever is not black.
+cover = float((px[:, :3].max(axis=1) * px[:, 3] > 0.02).mean())
 peak = float(px[:, :3].max())
 print(f"COVER {cover:.3f} PEAK {peak:.3f}")
 if not (0.05 < cover < 0.8 and peak > 0.5):
