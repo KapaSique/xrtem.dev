@@ -34,6 +34,7 @@ export const ui = {
   open: { en: "Open", ru: "Открыть" },
   selectedWork: { en: "Selected work", ru: "Избранные проекты" },
   menuWork: { en: "Projects", ru: "Проекты" },
+  viewCase: { en: "View case", ru: "Смотреть кейс" },
 } satisfies Record<string, LS>;
 
 export const hero = {
@@ -78,6 +79,7 @@ export type Work = {
   scope: LS[];
   year: string;
   link: { href: string; label: string };
+  caseHref?: string;
   media: { src: string; alt: LS };
 };
 
@@ -99,26 +101,27 @@ export const works: Work[] = [
     year: "2026",
     link: { href: "https://saqaomuk.com", label: "saqaomuk.com" },
     media: {
-      src: "/media/saqa/editorial.webp",
-      alt: { en: "SAQAOMUK collection campaign", ru: "Съёмка коллекции SAQAOMUK" },
+      src: "/media/saqa/boiled-cotton-shirt.webp",
+      alt: { en: "SAQAOMUK boiled cotton shirt", ru: "Рубашка SAQAOMUK из варёного хлопка" },
     },
   },
   {
     id: "profcosmetic",
     index: "02",
     title: "PROFCOSMETIC",
-    kind: { en: "Beauty · campaign design", ru: "Бьюти · дизайн кампаний" },
+    kind: { en: "Business system · analytics", ru: "Бизнес-система · аналитика" },
     summary: {
-      en: "Visuals and promotional layouts for beauty retail, from a campaign image to ready-to-use materials.",
-      ru: "Визуалы и промоматериалы для бьюти-ритейла: от образа кампании до готовых макетов.",
+      en: "I designed the concept and built an internal business analytics system with deep 1C integration: sales, stock and source quality in one workspace.",
+      ru: "Разработал дизайн-концепт и внутреннюю систему аналитики с глубокой интеграцией с 1С: продажи, запасы и качество данных в одном месте.",
     },
     scope: [
-      { en: "Campaigns", ru: "Кампании" },
-      { en: "Visual design", ru: "Визуальный дизайн" },
-      { en: "Print", ru: "Печать" },
+      { en: "Design concept", ru: "Дизайн-концепт" },
+      { en: "Owner dashboard", ru: "Дашборд владельца" },
+      { en: "1C integration", ru: "Интеграция 1С" },
     ],
     year: "2026",
     link: { href: "https://profcosmetic.dev", label: "profcosmetic.dev" },
+    caseHref: "/work/profcosmetic",
     media: {
       src: "/media/profcosmetic/editorial-portrait.png",
       alt: { en: "Editorial beauty portrait created for Profcosmetic", ru: "Редакционный бьюти-портрет для Profcosmetic" },
@@ -128,20 +131,20 @@ export const works: Work[] = [
     id: "chaseje",
     index: "03",
     title: "Chase.je",
-    kind: { en: "Archive boutique · e-commerce", ru: "Бутик-архив · e-commerce" },
+    kind: { en: "Private boutique · brand site", ru: "Частный бутик · имиджевый сайт" },
     summary: {
-      en: "A restrained online presence for a private archive boutique, built around atmosphere and a clear path to access.",
-      ru: "Сдержанное онлайн-пространство частного бутика-архива: атмосфера и ясный путь к доступу.",
+      en: "An atmospheric site for a private archive boutique: rare pieces, access by request and a deliberately restrained presentation.",
+      ru: "Атмосферный сайт частного бутика-архива: редкие вещи, доступ по запросу и сдержанная подача.",
     },
     scope: [
       { en: "Website", ru: "Сайт" },
       { en: "Art direction", ru: "Арт-дирекшн" },
-      { en: "E-commerce", ru: "E-commerce" },
+      { en: "Bilingual site", ru: "Два языка" },
     ],
     year: "2026",
     link: { href: "https://chaseje.com", label: "chaseje.com" },
     media: {
-      src: "/media/chase/boutique.jpg",
+      src: "/media/chase/homepage-current.png",
       alt: { en: "Chase.je home page", ru: "Главная Chase.je" },
     },
   },
