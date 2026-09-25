@@ -42,7 +42,7 @@ export function Hero() {
         {t(hero.intro)}
       </p>
 
-      <h1 className="relative mt-auto px-4 font-display text-[60px] font-light leading-[56px] tracking-[-0.035em] md:absolute md:left-[29.9%] md:top-[52%] md:mt-0 md:px-0 md:text-[clamp(72px,8.9vw,128px)] md:leading-[0.97]">
+      <h1 className="relative mt-auto px-4 font-display text-[60px] font-light leading-[56px] tracking-[-0.035em] md:absolute md:left-[29.9%] md:top-[52%] md:mt-0 md:px-0 md:text-[clamp(64px,8.9vw,128px)] md:leading-[0.97]">
         <span className="sr-only">{`${one} ${two} ${words[0]}`}</span>
         <span aria-hidden="true" className="block whitespace-nowrap">
           <Rise text={one} start={0.35} />
